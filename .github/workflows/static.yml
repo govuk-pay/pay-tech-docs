@@ -72,7 +72,7 @@ jobs:
             }
       - name: Next release version
         id: next-version
-        uses: alphagov/pay-ci/actions/next-semver@master
+        uses: govuk-pay/pay-ci/actions/next-semver@master
         with:
           package_version: ${{ steps.get-package-version.outputs.package_version }}
           release_version: ${{ steps.get-latest-release-version.outputs.result }}
