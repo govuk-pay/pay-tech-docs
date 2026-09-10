@@ -1,13 +1,11 @@
 ---
 title: Quick start
-last_reviewed_on: 2026-03-02
+last_reviewed_on: 2026-09-04
 review_in: 6 months
 weight: 1200
 ---
 
 # Quick start
-
-<%= warning_text('You must store your API keys securely. You must not share this key in publicly accessible documents or repositories. You must not share it with anyone who should not be using the GOV.UK Pay API directly.') %>
 
 Read this section to learn about what to do to get started with GOV.UK Pay.
 
@@ -80,9 +78,9 @@ You can still use test API keys for a service after it goes live.
 
 1. Select **Create a new API key**.
 
-Make sure you [keep your API keys safe](/security/#securing-your-developer-keys).
+<%= warning_text('You must store API keys securely. You must not include them in emails, support tickets or other messages to GOV.UK Pay. You must not put them in publicly accessible documents or repositories. Share API keys only with people or organisations that need them.<br><a href="/security/#securing-your-developer-keys">Read more about securing your API keys</a>.') %>
 
-<%= warning_text('Only use test API keys in sandbox or &#39;not live yet&#39; modes. Do not use a live API key in these modes. It will not work properly.') %>
+Use test API keys only in sandbox or &#39;not live yet&#39; modes. Live API keys will not work properly in these modes.
 
 ### Make a test API request
 
