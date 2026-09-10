@@ -100,11 +100,13 @@ Do not add an allow list of IP addresses to your firewall, because GOV.UK Pay’
 
 GOV.UK Pay authenticates API requests with [OAuth2 HTTP bearer tokens](http://tools.ietf.org/html/rfc6750).
 
-When you make an API requests, you need to use an `Authorization` HTTP header to provide your API key, with a `Bearer` prefix. For example:
+When you make an API request, you need to use an `Authorization` HTTP header to provide your API key, with a `Bearer` prefix. For example:
 
 ```text
 Authorization: Bearer {YOUR_API_KEY}
 ```
+
+[Read more about securing your API keys](/security/#securing-your-developer-keys).
 
 ## Rate limits
 

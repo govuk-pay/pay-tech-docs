@@ -1,6 +1,6 @@
 ---
 title: Security and compliance
-last_reviewed_on: 2025-11-13
+last_reviewed_on: 2026-09-04
 review_in: 6 months
 weight: 9200
 ---
@@ -17,13 +17,13 @@ Do not disclose the details of a suspected breach publicly until it has been fix
 
 GOV.UK Pay lets you create as many API keys as you want.
 
-We recommend letting all your developers experiment with their own test keys in
-sandbox or 'not live yet' mode, but keys for real integrations should only be shared
-with the minimum number of people necessary.
+You must store your API keys securely. You must not include API keys in emails, support tickets or other messages to GOV.UK Pay.
 
-This is because these keys can be
-used to create and manipulate payments. You must not commit these keys to public
-source code repositories.
+Share API keys only with people or organisations that need them. If you share an API key with a third-party supplier, your organisation is responsible for sharing it securely and making sure the supplier handles it securely.
+
+Test API keys are less sensitive than live API keys, but you should still handle them securely. We recommend letting all your developers experiment with their own test keys in sandbox or 'not live yet' mode.
+
+You should limit access to live API keys to the minimum number of people necessary. Live API keys can be used to create and manipulate payments, and to read all transaction data. You must not commit them to public source code repositories.
 
 Follow these steps to revoke your API key immediately if you believe it has been accidentally shared or compromised:
 
