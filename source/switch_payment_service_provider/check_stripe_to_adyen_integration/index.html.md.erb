@@ -1,0 +1,308 @@
+---
+title: Check how switching from Stripe to Adyen affects your integration
+last_reviewed_on: 2026-10-07
+review_in: 12 months
+weight: 7210
+---
+
+# Check how switching from Stripe to Adyen affects your integration
+
+Check whether your GOV.UK Pay integration needs changes before your service switches from Stripe to Adyen.
+
+This guidance is for people responsible for maintaining and testing your service's technical integration with GOV.UK Pay.
+
+You may work for the organisation using GOV.UK Pay or for an external supplier.
+
+It explains the integration differences you need to consider when your service switches from Stripe to Adyen.
+
+Use this guidance to:
+
+* check whether your integration is affected
+* identify any changes you need to make
+* plan and run tests
+* tell GOV.UK Pay if something is missing or could prevent your migration
+
+**Last updated:** 7 October 2026
+
+We will update this guidance when implementation or testing information changes.
+
+GOV.UK Pay will email an admin user for your service if a change could affect work you have already planned or completed.
+
+## When to contact GOV.UK Pay
+
+Email GOV.UK Pay support at <a href="mailto:govuk-pay-support@digital.cabinet-office.gov.uk">govuk-pay-support@digital.cabinet-office.gov.uk</a>  if:
+
+* you identify an integration impact that is not covered here
+* you cannot determine whether your integration is affected
+* an instruction does not match the behaviour you observe
+* you cannot test a change that you need to make
+* you need significant development or supplier work
+* the work could affect when your service is able to migrate
+
+## What will not change
+
+When your service switches to Adyen:
+
+* the payment journey for your users will stay the same
+* your team members, API keys and other service settings will stay the same
+* new payments created after the switch will use Adyen
+
+You can continue to refund payments previously processed by Stripe until the Stripe refund cut-off date. GOV.UK Pay will make this date available when it is confirmed.
+
+## Accept Adyen as a payment provider
+
+### What is changing
+
+For payments processed by Adyen, the `payment_provider` field will contain:
+
+`adyen`
+
+instead of:
+
+`stripe`
+
+This affects payment information returned through:
+
+* [Create a payment](/api_reference/create_a_payment_reference/)
+* [Get information about a single payment](/api_reference/single_payment_reference/)
+* [Search payments](/api_reference/search_payments_reference/)
+* [webhooks](/webhooks/)
+
+### Check your integration if
+
+Check your integration if it:
+
+* expects `payment_provider` to always contain `stripe`
+* rejects or does not recognise other payment provider values
+* uses the provider value to determine how payment information is processed
+
+### What you need to do
+
+Your integration must accept `adyen` as a valid value for `payment_provider`.
+
+Do not make your integration depend on the field containing only `stripe`.
+
+## Handle settlement information that arrives later
+
+### What is changing
+
+With Stripe, `settlement_summary.captured_date` becomes available almost immediately after the user confirms a payment.
+
+With Adyen, this field may not be available immediately.
+
+It becomes available after GOV.UK Pay receives the relevant information from Adyen. There may be a delay of several minutes.
+
+This affects:
+
+* [Get information about a single payment](/api_reference/single_payment_reference/)
+* [Search payments](/api_reference/search_payments_reference/)
+
+### Check your integration if
+
+Check your integration if it expects `settlement_summary.captured_date` to be populated as soon as a payment reaches a successful or captured state.
+
+### What you need to do
+
+Your integration must be able to handle `settlement_summary.captured_date` being absent initially.
+
+If you need the value, retrieve the payment again later.
+
+The `card_payment_captured` webhook also includes this information.
+
+## Handle payment fee information that arrives later
+
+### What is changing
+
+With Adyen, `net_amount` and `fee` may not be available immediately after a successful payment.
+
+The information becomes available after GOV.UK Pay receives the relevant information from Adyen. There may be a delay of several minutes.
+
+This can affect:
+
+* [Get information about a single payment](/api_reference/single_payment_reference/)
+* [Search payments](/api_reference/search_payments_reference/)
+* [webhooks](/webhooks/)
+
+### Check your integration if
+
+Check your integration if it expects `net_amount` or `fee` to be populated immediately after a successful or captured payment.
+
+### What you need to do
+
+Your integration must be able to handle these fields being absent initially.
+
+If you need the values soon after a payment, retrieve the payment again later.
+
+The values will also be available when you reconcile payments using the API.
+
+## Treat wallet card expiry dates as optional
+
+### What is changing
+
+For Stripe:
+
+* `card_details.expiry_date` is always available for Apple Pay payments
+* the field is not available for Google Pay payments
+
+For Adyen, the expiry date can be available for both Apple Pay and Google Pay payments.
+
+However, Adyen may occasionally not provide the information.
+
+This can affect:
+
+* [Get information about a single payment](/api_reference/single_payment_reference/)
+* [Search payments](/api_reference/search_payments_reference/)
+* [webhooks](/webhooks/)
+
+### Check your integration if
+
+Check your integration if it assumes `card_details.expiry_date` will always be present for Apple Pay payments.
+
+### What you need to do
+
+Treat `card_details.expiry_date` as optional for Apple Pay and Google Pay payments.
+
+Your integration must not fail if the field is absent.
+
+## Handle fees on Adyen refunds
+
+### What is changing
+
+Stripe refunds do not have a payment provider fee.
+
+A gateway fee applies to Adyen refunds.
+
+The `fee` and `net_amount` fields become available after GOV.UK Pay receives the relevant information from Adyen. There may be a delay of several minutes.
+
+This can affect:
+
+* [Check the status of a refund](/api_reference/refund_status_reference/)
+* [Search refunds](/api_reference/search_refunds_reference/)
+* [Get information about a payment's refunds](/api_reference/payment_refunds_reference/)
+
+### Check your integration if
+
+Check your integration if it:
+
+* uses refund `fee` or `net_amount`
+* assumes refunds do not have a gateway fee
+* expects fee information immediately after requesting a refund
+
+### What you need to do
+
+Your integration must be able to handle a gateway fee on Adyen refunds.
+
+If you need `fee` or `net_amount` shortly after requesting a refund, retrieve the refund again later.
+
+When reconciling refunds, you can use `from_settled_date` and `to_settled_date` to retrieve refunds settled during a particular period, including the fee and net amount.
+
+## Do not treat submitted as the final refund status
+
+### What is changing
+
+When you refund a Stripe payment through the API, Stripe confirms the outcome in the API response.
+
+When you request a refund for an Adyen payment, the initial refund status returned by GOV.UK Pay is:
+
+`submitted`
+
+Adyen confirms the final outcome later.
+
+### Check your integration if
+
+Check your integration if it assumes the status returned when you request a refund is the final outcome.
+
+### What you need to do
+
+Do not treat `submitted` as the final refund outcome.
+
+Accept `submitted` as the initial status.
+
+## Include won disputes when reconciling Adyen fees
+
+### What is changing
+
+For Stripe disputes, a dispute fee applies only to disputes with a status of `lost`.
+
+For Adyen disputes, a dispute fee applies to both:
+
+* `won`
+* `lost`
+
+This affects [Search disputes](/api_reference/search_disputes_reference/).
+
+### Check your integration if
+
+Check your integration if it includes only `lost` disputes when calculating or reconciling dispute fees and net amounts.
+
+### What you need to do
+
+Include both `won` and `lost` disputes when you query and reconcile dispute fees and net amounts.
+
+Do not assume that a dispute fee applies only to `lost` disputes.
+
+## Check that a recurring payment agreement is active
+
+### What is changing
+
+With Stripe, an agreement becomes `active` immediately after the user successfully completes the payment used to set up the agreement.
+
+With Adyen, the user will still return to your service after successfully completing the payment.
+
+However, the agreement may not become `active` immediately.
+
+GOV.UK Pay updates the agreement after it receives the relevant information from Adyen.
+
+This usually happens within a few minutes.
+
+You cannot take recurring payments until the agreement is `active`.
+
+### Check your integration if
+
+Check your integration if it assumes the agreement is `active` as soon as the user returns to your service after the first payment.
+
+### What you need to do
+
+Retrieve the agreement to check its latest status.
+
+Treat the agreement as ready for recurring payments only when its status is `active`.
+
+## Handle the gateway fee in comma-separated values (CSV) downloads
+
+### What is changing
+
+For Stripe transactions, the fee breakdown in GOV.UK Pay CSV downloads includes:
+
+* `Fee (transaction)`
+* `Fee (3DS)`
+* `Fee (fraud protection)`
+
+For Adyen transactions, it also includes:
+
+* `Fee (gateway)`
+
+The gateway fee also applies to refunds.
+
+### Check your systems if
+
+Check any integration, spreadsheet, reporting process or other system that processes fee information from GOV.UK Pay CSV downloads.
+
+### What you need to do
+
+Your integration, spreadsheet, reporting process or other system must be able to handle the additional `Fee (gateway)` field.
+
+## Test changes to your integration
+
+Plan and run tests for any changes you make to your integration.
+
+We will update this guidance about how to test these changes when it is available.
+
+### Check automated tests that use Stripe test cards
+
+Adyen uses different test card details from Stripe.
+
+Check your automated tests if they use Stripe test card details.
+
+We will update this guidance with the Adyen test card details when they are  confirmed.
+
+When the Adyen test cards are confirmed, update affected automated tests to use the appropriate card for each scenario.
