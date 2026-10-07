@@ -1,3 +1,4 @@
+---
 version: 2
 updates:
 - package-ecosystem: bundler
@@ -37,6 +38,15 @@ updates:
     time: "03:00"
   open-pull-requests-limit: 0
   labels:
-    - dependencies
-    - govuk-pay
-    - github_actions
+  - dependencies
+  - govuk-pay
+  - github_actions
+- package-ecosystem: github-actions
+  directory: /.github/workflows
+  schedule:
+    interval: daily
+    time: 03:00
+  open-pull-requests-limit: 3
+  cooldown: 3
+  allow:
+  - dependency-name: govuk-pay/pay-ci/*
