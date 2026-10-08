@@ -1,0 +1,137 @@
+---
+title: Switch payment service provider to Adyen
+last_reviewed_on: 2026-10-07
+review_in: 12 months
+weight: 7220
+---
+
+# Switch payment service provider to Adyen
+
+## Check you can switch to Adyen
+
+You can switch your payment service provider (PSP) to Adyen when GOV.UK Pay makes the option available in the GOV.UK Pay for your Stripe service.
+
+If you cannot see the option in the admin tool, wait for GOV.UK Pay to contact your organisation.
+
+You cannot currently switch a service from Worldpay to Adyen. If you need to switch from Worldpay to Adyen, email GOV.UK Pay support at [govuk-pay-support@digital.cabinet-office.gov.uk](mailto:govuk-pay-support@digital.cabinet-office.gov.uk).
+
+You must be a GOV.UK Pay admin user to switch a service's payment service provider.
+
+To check if you are an admin user for a service:
+
+1. In the [GOV.UK Pay admin tool](https://selfservice.payments.service.gov.uk/my-services), select the service from **My services**.
+1. Select **Settings**.
+1. Under About your service, select **Team members**.
+1. If your email address is listed under **Administrator**, you are an admin user.
+
+Before you switch, ask the team or supplier that maintains your GOV.UK Pay integration or payment reporting processes to check whether you need to make any changes.
+
+Read [Check how switching from Stripe to Adyen affects your integration](/switch_payment_service_provider/check_stripe_to_adyen_integration/).
+
+## Prepare to switch to Adyen
+
+Before you start, make sure you have:
+
+* your organisation's official name and address
+* your company registration number, if your organisation has one
+* your VAT registration number, if your organisation is registered for VAT
+* your organisation's bank account details
+* details about a responsible person and a service director who is different from the responsible person
+* a descriptor that will appear on paying users' bank statements
+* a debit or credit card for making a refundable real £1 payment, unless you can use **Skip making a payment**
+* documents that confirm your organisation's details
+
+You will also need to select a category that describes what your service takes payments for.
+
+[Read the guidance about responsible person and service director information](https://www.payments.service.gov.uk/responsible-person-and-director-information/).
+
+As part of the switching process, you must also review Adyen's legal terms and confirm that you accept them. If you do not have the authority to accept the Adyen legal terms, you can delegate this task to a colleague who does. 
+
+### Documents about your organisation
+
+The documents you need depend on your organisation and whether it is registered for VAT.
+
+You will need at least one of the following:
+
+* Companies House registration document
+* evidence of your VAT registration
+* an alternative document if your organisation is not registered with Companies House
+
+If your organisation is not registered with Companies House, you can provide one of the following:
+
+* D-U-N-S (Dun & Bradstreet number) certificate
+* HM Revenue & Customs account statement
+* Charity Commission document
+* Office of the Scottish Charity Regulator document
+* NHS ODS (Organisation Data Service) organisation record or extract
+* local authority constitution or another official council document
+* annual report and accounts or audited public sector accounts, for example an Annual Governance and Accountability Return (AGAR)
+* Cabinet Office Public Bodies Directory record
+* Act of Parliament, Royal Charter or Statutory Instrument establishing the organisation, together with recent evidence confirming its current status
+* official letter from a sponsoring government department confirming the organisation’s legal status
+
+Any document you upload must either be dated within the last 12 months or show that your organisation is still active.
+
+If your organisation cannot provide any of the documents listed, you can use a form instead. Download the form during onboarding in the admin tool, complete it, then upload it.
+
+## Switch to Adyen
+
+You need to complete the switching process separately for each service you want to switch.
+
+### 1. Start the switching process
+
+To start switching:
+
+1. Sign in to the [GOV.UK Pay admin tool](https://selfservice.payments.service.gov.uk/my-services).
+1. Select the Stripe service from **My services**.
+1. On the **Important notification** banner, select **Switch to Adyen**.
+
+You can also select **Switch your payment provider to Adyen** from the service dashboard.
+
+### 2. Provide the required information
+
+Complete the tasks in the admin tool to provide the required information.
+
+Adyen will check your organisation’s details. The checks should be quick but can take up to 2 full working days.
+
+GOV.UK Pay will email you when the checks are complete or if you need to provide more information.
+
+You can continue taking payments while Adyen completes the checks.
+
+Wait until GOV.UK Pay emails you to tell you that you can make the £1 payment.
+
+If you have not received an email after 2 full working days, email GOV.UK Pay support at [govuk-pay-support@digital.cabinet-office.gov.uk](mailto:govuk-pay-support@digital.cabinet-office.gov.uk).
+
+### 3. Make a £1 payment
+
+After Adyen confirms that its checks are complete, return to your service in the admin tool and continue the switching process.
+
+You need to make a real £1 payment using a debit or credit card unless you can use **Skip making a payment**.
+
+You can use **Skip making a payment** if you already have a service live with Adyen that uses the same bank account details.
+
+Follow the instructions in the admin tool to make the payment.
+
+[Read the guidance about finding payments in the GOV.UK Pay admin tool and the API](/reporting/#find-payments).
+
+Check that the £1 payment has arrived in your service's bank account. This can take up to 2 full working days.
+
+Wait until the payment has arrived before you finish switching. You can refund it after you complete the switch to Adyen.
+
+### 4. Finish switching to Adyen
+
+When the £1 payment has arrived in your bank account, return to your service in the admin tool.
+
+Select **Finish switching to Adyen** and follow the instructions to complete the switch.
+
+You have now switched this service to Adyen. Adyen will process new payments for the service.
+
+## Refund payments after switching to Adyen
+
+After you switch to Adyen, you can still refund payments that Stripe processed before the switch until the Stripe refund cut-off date. GOV.UK Pay will tell you this date separately.
+
+To refund a payment in the admin tool, sign in, select your service, then select **Transactions**.
+
+You can also refund payments using the GOV.UK Pay API.
+
+[Read the guidance about refunding payments using the GOV.UK Pay API](/refunding_payments/).

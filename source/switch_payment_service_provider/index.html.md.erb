@@ -1,36 +1,51 @@
 ---
 title: Switch payment service provider (PSP)
-last_reviewed_on: 2025-11-13
+last_reviewed_on: 2026-10-07
 review_in: 12 months
 weight: 7200
 ---
 
 # Switch payment service provider (PSP)
 
-You can switch payment service provider (PSP) through the GOV.UK Pay admin tool. Read our [guidance about choosing a PSP](https://www.payments.service.gov.uk/payment-service-provider/).
+You can switch payment service provider (PSP) through the GOV.UK Pay admin tool.
 
-You can switch to:
+You must be a GOV.UK Pay admin user to switch a service's payment service provider.
 
-* Stripe, GOV.UK Pay's PSP
-* Worldpay, Government Banking's PSP — this option is only for central government or health sector organisations
+You do not need technical knowledge to carry out the switch in the admin tool.
 
-GOV.UK Pay has created:
+[Read the guidance about which payment service provider your organisation should use](https://www.payments.service.gov.uk/payment-service-provider/).
 
-* [guidance for switching to Stripe](switch_psp_to_stripe/#switch-payment-service-provider-to-stripe)
-* [guidance for switching to Worldpay](switch_psp_to_worldpay/#switch-payment-service-provider-to-worldpay)
+## Switching options
 
-Admin users can switch a service to Stripe in the GOV.UK Pay admin tool. Email GOV.UK Pay support at [govuk-pay-support@digital.cabinet-office.gov.uk](mailto:govuk-pay-support@digital.cabinet-office.gov.uk) if you have questions about using Stripe.
+> **GOV.UK Pay is replacing Stripe with Adyen**
 
-Switching to Worldpay can take up to 6 weeks, whilst Government Banking creates your Worldpay account. After this, admin users can switch services to Worldpay in the GOV.UK Pay admin tool. Email Government Banking at [serviceteam.gbs@hmrc.gov.uk](mailto:serviceteam.gbs@hmrc.gov.uk) if you have questions about using Worldpay.
+> GOV.UK Pay will contact your organisation when your service can switch to Adyen.
 
-You do not need any technical knowledge to switch PSP.
+> All Stripe services will eventually need to switch to Adyen. GOV.UK Pay will confirm the final deadline later.
+
+If your service uses Stripe:
+
+* you can [switch to Worldpay](/switch_payment_service_provider/switch_psp_to_worldpay/) through Government Banking if your organisation is in central government or the health sector
+* you can [switch to Adyen](/switch_payment_service_provider/switch_psp_to_adyen/) only when GOV.UK Pay makes the option available for your service
+
+You cannot switch a service from Worldpay to Stripe. You cannot currently switch a service from Worldpay to Adyen.
+
+Email GOV.UK Pay support at [govuk-pay-support@digital.cabinet-office.gov.uk](mailto:govuk-pay-support@digital.cabinet-office.gov.uk) if you have questions about using Adyen or Stripe.
+
+Worldpay is Government Banking’s payment service provider. Government Banking can take up to 6 weeks to create your Worldpay account. When the account is ready, an admin user can switch the service to Worldpay in the admin tool.
+
+Email Government Banking at [serviceteam.gbs@hmrc.gov.uk](mailto:serviceteam.gbs@hmrc.gov.uk) if you have questions about using Worldpay.
 
 ## Understand what the switch affects
 
-The switch is just a change of PSP. Your users will not be made aware of any changes in your service.
+Users making payments while you switch are not affected. Your existing payment service provider will still process active payments.
 
-Users making payments during the switching period are not affected. Your existing PSP will still process active payments.
+The switching process is the same whether your service integrates with the GOV.UK Pay API or uses payment links.
 
-The switching process is the same whether your service integrates with GOV.UK Pay’s API or uses payment links. Switching does not need any code changes. Your existing API keys remain valid. Your existing payment links continue to work with your new PSP.
+Your existing API keys remain valid. Your existing payment links continue to work with your new payment service provider.
+
+If you are switching from Stripe to Adyen, ask the team or supplier that maintains your GOV.UK Pay integration or payment reporting processes to check whether you need to make any changes before you switch.
+
+Read [Check how switching from Stripe to Adyen affects your integration](/switch_payment_service_provider/check_stripe_to_adyen_integration/).
 
 You may need to make changes to your financial reporting if you switch from Stripe to Worldpay as [Stripe offers additional reporting data](https://docs.payments.service.gov.uk/reporting).
