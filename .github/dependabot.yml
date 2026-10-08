@@ -45,8 +45,7 @@ updates:
   directory: /.github/workflows
   schedule:
     interval: daily
-    time: 03:00
+    time: "03:00"
   open-pull-requests-limit: 3
-  cooldown: 3
   allow:
   - dependency-name: govuk-pay/pay-ci/*
