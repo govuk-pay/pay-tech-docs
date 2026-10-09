@@ -1,6 +1,6 @@
 ---
 title: Switch payment service provider to Stripe
-last_reviewed_on: 2025-11-13
+last_reviewed_on: 2026-10-07
 review_in: 12 months
 weight: 7230
 ---
@@ -9,18 +9,26 @@ weight: 7230
 
 This guidance tells you how to switch your payment service provider (PSP) to Stripe.
 
-Users making payments as you switch are unaffected. Your old PSP will process their payments until you finalise the switch.
+> **Stripe is being replaced by Adyen**
 
-You must be a GOV.UK Pay admin user to switch PSP. To check if you are an admin user for a service:
+> If you switch your service to Stripe, you will need to switch it to Adyen later.
 
-1. Select the service from **My services**.
+> GOV.UK Pay will contact your organisation when your service can switch to Adyen. GOV.UK Pay will confirm the final deadline later.
+
+## Check you can switch to Stripe
+
+You must be a GOV.UK Pay admin user to switch a service's payment service provider.
+
+To check if you are an admin user for a service:
+
+1. In the [GOV.UK Pay admin tool](https://selfservice.payments.service.gov.uk/login), select the service from **My services**.
 1. Select **Settings**.
 1. Under **About your service**, select **Team members**.
-1. If your email address is listed under **Administrators**, you are an admin user.
+1. If your email address is listed under **Administrator**, you are an admin user.
 
-## 1. Prepare to switch to Stripe
+## Prepare to switch to Stripe
 
-Email [govuk-pay-support@digital.cabinet-office.gov.uk](mailto:mailto:govuk-pay-support@digital.cabinet-office.gov.uk) asking to switch your PSP to Stripe. Your email must include:
+Email [govuk-pay-support@digital.cabinet-office.gov.uk](mailto:mailto:govuk-pay-support@digital.cabinet-office.gov.uk) asking to switch your payment service provider to Stripe. Your email must include:
 
 * a list of services you want to switch to Stripe
 * a clear payment descriptor of maximum 22 characters for each service - the payment descriptor will appear on your users' bank statements, not the service itself
@@ -28,7 +36,7 @@ Email [govuk-pay-support@digital.cabinet-office.gov.uk](mailto:mailto:govuk-pay-
 
 You can [read Stripe's payment or 'statement' descriptor guidance](https://stripe.com/docs/statement-descriptors) for more information.
 
-The GOV.UK Pay support team will email you to confirm when you can start switching PSP.
+The GOV.UK Pay support team will email you to confirm when you can start switching payment service provider.
 
 To switch to Stripe, you’ll need:
 
@@ -57,12 +65,12 @@ Before switching, read the:
 * [Stripe Connected Account Agreement](https://selfservice.payments.service.gov.uk/policy/stripe-connected-account-agreement)
 
 
-## 2. Switch to Stripe
+## Switch to Stripe
 
 You need to repeat the following process for each service you want to switch.
 
 
-### 2a. Provide your organisation details
+### 1. Provide your organisation details
 
 1. Sign in to the GOV.UK Pay admin tool.
 1. Select the service you want to switch from **My services** - services you can switch are labelled **LIVE - SWITCH PSP**.
@@ -72,7 +80,7 @@ You need to repeat the following process for each service you want to switch.
 Complete the tasks on this page to start switching to Stripe.
 
 
-### 2b. Make a test payment to complete the switch to Stripe
+### 2. Make a test payment to complete the switch to Stripe
 
 Before you complete the switch to Stripe, you need to make a live payment. This payment tests the integration between Stripe and GOV.UK Pay and makes sure you have correctly connected your Stripe account with your GOV.UK Pay service.
 
@@ -90,14 +98,14 @@ If your service uses the GOV.UK Pay API for reporting, you may want to check the
 
 To finalise your service’s switch to Stripe, select **Switch to Stripe**. A **Success** banner confirms the switch.
 
-You have now switched PSP to Stripe. Stripe will process new payments.
+You have now switched payment service provider to Stripe. Stripe will process new payments.
 
 ## Refund payments after switching to Stripe
 
-After you switch to Stripe, you can still refund old payments through your old PSP.
+After you switch to Stripe, you can still refund old payments through your old payment service provider.
 
-For now, GOV.UK Pay will maintain an integration with your old PSP to let your service process refunds through your old PSP. However, if your contract with your old PSP expires, or your old PSP stops operating, your service cannot refund payments through GOV.UK Pay.
+For now, GOV.UK Pay will maintain an integration with your old payment service provider to let your service process refunds through your old payment service provider. However, if your contract with your old payment service provider expires, or your old payment service provider stops operating, your service cannot refund payments through GOV.UK Pay.
 
-If you cannot refund a payment through your old PSP, find an alternative like a cheque or bank transfer.
+If you cannot refund a payment through your old payment service provider, find an alternative like a cheque or bank transfer.
 
 Refund payments by signing into the [GOV.UK Pay admin tool](https://selfservice.payments.service.gov.uk/login), selecting your service, and choosing the **Transactions** tab. Alternatively, you can use [the GOV.UK Pay API](https://docs.payments.service.gov.uk/refunding_payments/#refund-a-payment).
