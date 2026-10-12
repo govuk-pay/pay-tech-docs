@@ -1,6 +1,6 @@
 ---
 title: Take payments with Apple Pay and Google Pay
-last_reviewed_on: 2025-11-13
+last_reviewed_on: 2026-10-12
 review_in: 6 months
 weight: 2300
 ---
@@ -20,7 +20,7 @@ Users can only use Google Pay if they're making payments in a supported browser,
 
 Users can only use Apple Pay if they're making payments on a compatible Mac, iPhone, or iPad in a supported browser, such as Safari.
 
-If your payment service provider (PSP) is Stripe, Apple Pay and Google Pay are turned on by default. 
+If your payment service provider (PSP) is Stripe, Apple Pay and Google Pay are turned on by default.
 
 If your PSP is Worldpay, Apple Pay is turned on by default, but you'll need to turn on Google Pay manually.
 
@@ -103,9 +103,9 @@ You can see the payment in the GOV.UK Pay admin tool and through the API.
 
 ### Test Apple Pay
 
-To test Apple Pay, you must set up Apple Pay on an iOS or macOS device. You can use a real credit or debit card. 
+To test Apple Pay, you must set up Apple Pay on an iOS or macOS device. You can use a real credit or debit card.
 
-We will not take any money if you add a real credit debit card to test Apple Pay. 
+We will not take any money if you add a real credit debit card to test Apple Pay.
 
 If your organisation has an Apple developer account, you may be able to use [Apple’s test cards](https://developer.apple.com/apple-pay/sandbox-testing/).
 
@@ -151,6 +151,8 @@ If you rely on cardholder information as part of your service, you should not co
 | Email address                 | Yes, if you turn on email address collection   | Yes, if you turn on email address collection                 | Yes, if you turn on email address collection           |
 
 The GOV.UK Pay API returns a `null` value for any cardholder information that we do not store for digital wallet payments.
+
+For Apple Pay and Google Pay payments processed by Adyen, `card_details.expiry_date` may be omitted from the API response rather than returned as `null`.
 
 For example:
 
