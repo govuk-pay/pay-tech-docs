@@ -1,6 +1,6 @@
 ---
 title: Refund a payment
-last_reviewed_on: 2025-11-13
+last_reviewed_on: 2026-10-14
 review_in: 12 months
 weight: 4100
 ---
@@ -103,6 +103,8 @@ The response includes:
 
 You can see full definitions of these response attributes in our [API reference](/api_reference/refund_payment_reference).
 
+For refunds of live payments processed by Adyen, GOV.UK Pay initially returns a `status` of `submitted`. Adyen confirms the final outcome later. Do not treat `submitted` as the final refund outcome.
+
 If GOV.UK Pay could not successfully create the refund, the JSON response will contain an [API error code](/api_reference/#gov-uk-pay-api-error-codes) and a description of the error.
 
 ## Checking the status of a refund
@@ -147,6 +149,13 @@ The `status` attribute shows where the refund is in its lifecycle.
 |submitted|We've submitted your refund request to your PSP. Refunds do not have a `submitted` status if you're testing refunds in sandbox or 'not live yet' modes.|
 |success|Your PSP has successfully processed the refund.|
 |error|Your PSP could not process the refund, usually because your user's payment card is cancelled or expired, or you do not have enough money in your account to refund your user.|
+
+
+## Refund fees
+
+A gateway fee applies to refunds of payments processed by Adyen.
+
+For Adyen refunds, `fee` and `net_amount` may take several minutes to become available.
 
 ## Where your PSP takes the refund amount from
 
@@ -228,6 +237,8 @@ You can see definitions and possible values of every parameter and attribute for
 `GET /v1/refunds?{QUERY_PARAMETERS}`
 
 You can see a full index of the search parameters for this endpoint in our [API reference](/api_reference/search_refunds_reference).
+
+For refunds of payments processed by Adyen, you can use `from_settled_date` and `to_settled_date` to find refunds settled during a particular period, including their `fee` and `net_amount` values.
 
 This example search request would return refunds made between 1:30pm on 20 September 2019 and 3:00pm on 22 September 2019:
 

@@ -1,6 +1,6 @@
 ---
 title: Search refunds API reference
-last_reviewed_on: 2023-06-22
+last_reviewed_on: 2026-10-14
 review_in: 12 months
 weight: 14240
 ---
@@ -32,8 +32,8 @@ The data from this endpoint is eventually consistent, meaning it is updated on a
 | ----------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `from_date`          | date (ISO 8601) | Returns refunds created on or after the `from_date`.<br><br>Date and time must use Coordinated Universal Time (UTC) and ISO 8601 format to second-level accuracy - `YYYY-MM-DDThh:mm:ssZ`.                                                                                                     |
 | `to_date`            | date (ISO 8601) | Returns refunds created before the `to_date`.<br><br>Date and time must use Coordinated Universal Time (UTC) and ISO 8601 format to second-level accuracy - `YYYY-MM-DDThh:mm:ssZ`.                                                                                                            |
-| `from_settled_date` | date (ISO 8601) | Returns refunds settled on or after the `from_settled_date` value.<br><br>You can only use `from_settled_date` if your payment service provider is Stripe.<br><br>Date must use ISO 8601 format to date-level accuracy - `YYYY-MM-DD`.<br><br>Refunds are settled when Stripe takes the refund from your account balance. |
-| `to_settled_date`   | date (ISO 8601) | Returns refunds settled before the `to_settled_date` value.<br><br>You can only use `to_settled_date` if your payment service provider is Stripe.<br><br>Date must use ISO 8601 format to date-level accuracy - `YYYY-MM-DD`.<br><br>Refunds are settled when Stripe takes the refund from your account balance.         |
+| `from_settled_date` | date (ISO 8601) | Returns refunds settled on or after the `from_settled_date` value.<br><br>You can use `from_settled_date` only if your payment service provider is Adyen or Stripe.<br><br>Date must use ISO 8601 format to date-level accuracy - `YYYY-MM-DD`.<br><br>Refunds are settled when Stripe takes the refund from your account balance. |
+| `to_settled_date`   | date (ISO 8601) | Returns refunds settled before the `to_settled_date` value.<br><br>You can use `to_settled_date` only if your payment service provider is Adyen or Stripe.<br><br>Date must use ISO 8601 format to date-level accuracy - `YYYY-MM-DD`.<br><br>Refunds are settled when Stripe takes the refund from your account balance.         |
 | `page`                | number          | Returns a specific page of results.<br><br>Defaults to `1`.<br><br>You can [read more about search pagination](/api_reference/#pagination).                                                                                                                                                                                                                                    |
 | `display_size`       | number          | The number of refunds returned per results page.<br><br>Defaults to `500`. Maximum value is `500`.<br><br>You can [read more about search pagination](/api_reference/#pagination).                                                                                                                                                                                           |
 
