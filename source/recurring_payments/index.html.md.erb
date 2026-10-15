@@ -1,6 +1,6 @@
 ---
 title: Take recurring payments
-last_reviewed_on: 2026-03-03
+last_reviewed_on: 2026-10-15
 review_in: 6 months
 weight: 2200
 ---
@@ -18,7 +18,7 @@ Your service has [additional responsibilities when taking recurring payments](/r
 * authenticating users
 * getting and recording users’ consent for you to take recurring payments
 * managing payment schedules
-* telling users when you’re going to take or change payments 
+* telling users when you’re going to take or change payments
 * letting users amend their recurring payments
 
 You should be familiar with [the standard GOV.UK Pay payment flow](/payment_flow) before reading about recurring payments.
@@ -29,7 +29,7 @@ This page explains the recurring payment flow, your responsibilities, and how to
 
 1. You create an ‘agreement’ between your service and your user through our API. This is an agreement for you to use your user’s payment details to make ongoing payments for your service.
 
-1. You set up the agreement by getting your user’s consent and taking their first payment. You instruct our API to save their payment details. This makes the agreement for recurring payments active.
+1. You set up the agreement by getting your user’s consent and taking their first payment. You instruct our API to save their payment details. GOV.UK Pay makes the agreement active when the setup is complete.
 
 1. You take recurring payments by referencing the active agreement in your API requests when creating payments. The agreement lets GOV.UK Pay authorise the payment with the user’s saved payment details.
 
@@ -57,11 +57,13 @@ In this integration example, the service creates an agreement when a user says t
 
 7. Your service directs the user to GOV.UK Pay to make their first payment. The user follows the standard payment flow.
 
-8. The user completes their first payment and GOV.UK Pay returns them to your service. Your PSP stores the user's payment details.
+8. The user successfully completes their first payment and GOV.UK Pay returns them to your service. The payment service provider saves the user’s payment details as part of setting up the agreement.
 
-9. Your service [creates recurring payments using the `POST /v1/payments` endpoint](/recurring_payments/#taking-recurring-payments). In your request body, you  set `authorisation_mode` to `agreement` and include `"agreement_id": "{AGREEMENT_ID}"`, replacing `{AGREEMENT_ID}` with the agreement you set up earlier.
+9. Your service retrieves the agreement using [GET /v1/agreements/{AGREEMENT_ID}](/api_reference/single_agreement_reference/#get-information-about-a-single-agreement-for-recurring-payments-api-reference) to check its latest `status`. If the agreement is not `active`, wait and check its status again later.
 
-10. GOV.UK Pay authorises the payment using the user's payment details your PSP saved during the first payment.
+10. Once the agreement is active, your service [creates recurring payments using the `POST /v1/payments` endpoint](/recurring_payments/#taking-recurring-payments). In your request body, set the `authorisation_mode` to `agreement` and include `"agreement_id": "{AGREEMENT_ID}"`, replacing `{AGREEMENT_ID}` with the agreement you set up earlier.
+
+11. GOV.UK Pay authorises the payment using the user’s payment details saved by the payment service provider.
 
 ## Before you start taking recurring payments
 
@@ -180,7 +182,11 @@ You can also use `set_up_agreement` to reactivate a cancelled agreement.
 
 When your user is making their first payment, GOV.UK Pay will show your user the `description` you sent when you created the agreement.
 
-Once the user has made the payment, the agreement’s `status` will be `active`. You can use active agreements to take recurring payments.
+After the user successfully completes their first payment, check the agreement's `status` using [GET /v1/agreements/{AGREEMENT_ID}](/api_reference/single_agreement_reference/#get-information-about-a-single-agreement-for-recurring-payments-api-reference). You can take recurring payments when the agreement is `active`.
+
+For payments processed by Adyen, the agreement may not become `active` immediately after the user returns to your service. GOV.UK Pay updates the agreement after it receives the relevant information from Adyen, usually within a few minutes.
+
+If the agreement is not `active`, check its status again later. Do not take recurring payments until the agreement is `active`.
 
 If the user’s payment fails, their payment details are not saved and the agreement’s `status` remains `created`.
 
@@ -190,13 +196,13 @@ Read more about creating payments in [our guidance for taking payments](/making_
 
 ### Update a user’s recurring payment card details
 
-You can update the card that GOV.UK Pay uses to take recurring payments from users. This overrides the existing card details. You should do this if a user’s existing card is going to expire soon, or if a user tells you they want to pay with a different card. 
+You can update the card that GOV.UK Pay uses to take recurring payments from users. This overrides the existing card details. You should do this if a user’s existing card is going to expire soon, or if a user tells you they want to pay with a different card.
 
 You could be charged failed payment fees if you try to take payments from an expired card.
 
 To update the user’s card details, repeat [the process to set up an agreement](#set-up-an-agreement-for-recurring-payments) by creating a payment and adding `set_up_agreement: "{AGREEMENT_ID}"` to your API request body. Replace `"{AGREEMENT_ID}"` with the same `agreement_id` you sent when first setting up this agreement.
 
-Once the user has successfully made the payment, you can take recurring payments using their new card. 
+Once the user has successfully made the payment, you can take recurring payments using their new card.
 
 ## Taking recurring payments
 
@@ -272,8 +278,6 @@ To continue using the same agreement to take recurring payments, you must [set u
 
 You can also [create a new agreement for recurring payments](#create-an-agreement-for-recurring-payments). The user’s payment history will still be associated with the cancelled agreement. Any new recurring payments will be associated with the new agreement.
 
-
-
 ### Use GOV.UK Pay's optional features with recurring payments
 
 You can use some of GOV.UK Pay's optional features when taking recurring payments. You can:
@@ -324,7 +328,6 @@ You can [read more about using webhooks to automatically receive updates](/webho
 
 GOV.UK Pay have [mock card numbers for you to test your integration](/testing_govuk_pay/#use-mock-card-numbers). You can also use specific mock card numbers to test recurring payments.
 
-
 ##Contacting your users
 
 Use these templates to write the emails you'll send your paying users when they set up or cancel agreements with your service. Change these as needed to make sense for your service.
@@ -346,7 +349,7 @@ You have also set up automatic card payments. You'll be charged {AMOUNT} every {
 Your next payment date is {DD MONTH YYYY}.
 
 We'll take a single payment on {FUTURE DATE} using these details:
- 
+
 Card number: XXXX XXXX XXXX 4242
 Name: J BLOGGS
 Expiry date: XX/20XX
@@ -443,7 +446,6 @@ You can {UPDATE YOUR CARD HERE} To cancel, call {PHONE NUMBER}. You’ll need {R
 
 To cancel, {LOG INTO YOUR ACCOUNT / CLICK THIS LINK}
 ```
-
 
 ## Reporting on recurring payments
 
@@ -581,7 +583,7 @@ When you use the API to get information about agreements, the `status` response 
 
 | Status    | Meaning                                                                                                                                                                                                                                                                                                                                                                    |
 | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `created`   | You have created the agreement using the API.<br><br>Your user has not yet made [their first payment to set up the agreement](/recurring_payments/#set-up-an-agreement-for-recurring-payments).                                                                                                                                                                         |
+| `created`   | You have created the agreement using the API, but it is not yet `active`.<br><br>You cannot use this agreement to take recurring payments. |
 | `active`    | You have set up the agreement by saving a user’s card details when they make their first payment.<br><br>You can [use this agreement to take recurring payments](/recurring_payments/#taking-recurring-payments).                                                                                                                                                           |
 | <nobr>`cancelled` | You have cancelled the agreement.<br><br>You cannot use this agreement to take recurring payments unless you set it up again.<br><br>Read more about [cancelling and reactivating agreements for recurring payments](/recurring_payments/#cancel-an-agreement-for-recurring-payments) or [API reference documentation](/api_reference/cancel_agreement_reference). |
 | `inactive` | You have tried to take a payment with this agreement, but the payment failed.<br><br>You cannot use this agreement to take recurring payments unless you set it up again.<br><br>Read more about [handling failed recurring payments](#handling-failed-recurring-payments). |
@@ -598,7 +600,7 @@ You can cancel an agreement through the [GOV.UK Pay admin tool](https://selfserv
 
 1. Go to **Agreements**.
 1. Select the agreement you want to cancel.
-1. Select **Cancel this agreement**. 
+1. Select **Cancel this agreement**.
 1. Select **Confirm cancellation**.
 
 You can see who cancelled an agreement and when they cancelled it in **Agreement details**.
