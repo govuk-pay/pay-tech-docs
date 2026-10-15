@@ -1,6 +1,6 @@
 ---
 title: Reconcile and report on payments
-last_reviewed_on: 2025-11-13
+last_reviewed_on: 2026-10-15
 review_in: 6 months
 weight: 3100
 ---
@@ -18,21 +18,15 @@ This page covers:
 
 ## How payouts work
 
-The way payments come into your bank account is different depending on whether your PSP is Worldpay or Stripe.
+The way payments come into your bank account depends on your payment service provider (PSP).
 
-### How Worldpay payouts work
+### How  Adyen payouts work
 
-You will receive one payment into your bank account for each Worldpay merchant code.
-
-If you have more than one service in Pay, you can choose to use the same merchant code for each service or a different merchant code for each one. 
-
-If you have multiple services on one merchant code, you can use our reporting API to find all the transactions that are on that merchant code. Alternatively, select **Transactions for all services** in the admin tool to download a CSV with this information. The merchant code itself is not shown in the API or the CSV, but you can use the description line to find the relevant transactions.
-
-You can change what is shown on your bank statement for the payment in the Worldpay settings.
+Narrative content: Payouts are another webhook. We get a report and on that report there are payments and refunds and other detail. Payouts are listed as bank transfers. Report is generated around 1am daily with a delay of at least 24 hours.
 
 ### How Stripe payouts work
 
-You will receive one payment into your bank account for each Stripe service you have in Pay. 
+You will receive one payment into your bank account for each Stripe service you have in Pay.
 
 You can choose to have multiple types of transaction going through one service (e.g. licensing and council tax, or parking fines and parking permits), or you can choose to have separate services for each type of transaction. You can use the description you set when you created a payment to help you determine what that payment was for.
 
@@ -43,6 +37,16 @@ You can download a report showing the total amount you received from Stripe in e
 The payout from Stripe will appear on your bank statement with a description based on your service’s name. If you want to change this description, just contact the GOV.UK Pay team.
 
 The minimum payout for Stripe is £1.
+
+### How Worldpay payouts work
+
+You will receive one payment into your bank account for each Worldpay merchant code.
+
+If you have more than one service in Pay, you can choose to use the same merchant code for each service or a different merchant code for each one.
+
+If you have multiple services on one merchant code, you can use our reporting API to find all the transactions that are on that merchant code. Alternatively, select **Transactions for all services** in the admin tool to download a CSV with this information. The merchant code itself is not shown in the API or the CSV, but you can use the description line to find the relevant transactions.
+
+You can change what is shown on your bank statement for the payment in the Worldpay settings.
 
 ## Timezones in GOV.UK Pay
 
@@ -79,7 +83,6 @@ When you log into the [GOV.UK Pay admin tool](https://selfservice.payments.servi
 
 You can find payments using:
 
-
 - a reference number
 - a user’s email address
 - the payment status (for example in disputed, refunded, in progress)
@@ -87,9 +90,7 @@ You can find payments using:
 - the user’s card details
 - metadata or reporting columns
 
-
 When you select a payment, you can see the history of the payment. For example, you can see when your service created the payment and when the user paid.
-
 
 You can also download a CSV spreadsheet of all your selected payments to help with [reconciliation](#check-your-payments-are-correct-39-reconciliation-39). You can download one report for all your services or one report for each separate service.
 
@@ -97,17 +98,12 @@ You can also see payments made to your bank account by following the link from *
 
 Dates and times in the GOV.UK Pay admin tool use local UK time. You can [read more about timezones in GOV.UK Pay](#timezones-in-gov-uk-pay).
 
-
 ### Use the API to find payments
 
 Before reading this section, you should be familiar with [making
 payments](/making_payments).
 
-You can get data from the GOV.UK Pay API in a format suitable for automatic
-processing. For example, you could develop software to query the GOV.UK Pay
-API for payment data periodically and import the data into your finance
-system. This could remove routine manual operations from your workflow and
-lead to significant cost savings for your organisation.
+You can get data from the GOV.UK Pay API in a format suitable for automatic processing. For example, you could develop software to query the GOV.UK Pay API for payment data periodically and import the data into your finance system. This could remove routine manual operations from your workflow and lead to significant cost savings for your organisation.
 
 You can use the GOV.UK Pay API to:
 
@@ -191,10 +187,9 @@ The response contains:
 * the status of the payment (`state`)
 * details you sent when you created the payment (`reference`, `description`, `metadata`)
 
-You can see definitions and possible values for every attribute in this response in our [API reference for getting information about a single payment](/api_reference/single_payment_reference). 
+You can see definitions and possible values for every attribute in this response in our [API reference for getting information about a single payment](/api_reference/single_payment_reference).
 
 You can also [read about the full payment status lifecycle](/api_reference/#payment-status-lifecycle) and what it means for your service and your user.
-
 
 ##### Use the API to check when your PSP took a payment
 
@@ -203,7 +198,9 @@ You can see when your payment service provider (PSP) took a payment from your us
 The response from `GET /v1/payments/{PAYMENT_ID}` contains:
 
 - `capture_submit_time` if we've asked your PSP to take the payment from your user's account
-- `captured_date` if your PSP has taken the payment
+- `captured_date`, when available, showing the date your PSP took the payment
+
+For payments processed by Adyen, `settlement_summary.captured_date` may take several minutes to become available after the payment is captured.
 
 In this example, GOV.UK Pay asked the PSP to take the payment from the user's account at 5:15pm on 21 January 2022 and the PSP took the payment on the same day:
 
@@ -237,15 +234,17 @@ In this example, we've deducted a £2 PSP fee (`fee`) from the user's £40 payme
 
 Stripe may charge transaction fees on failed payments. If this happens, `net_amount` will be a negative number. From 6 April 2022, Stripe will take negative net amounts from your Stripe account balance. For example, a `net_amount` of `-200` on a payment will take £2.00 from your Stripe account.
 
-You can test Stripe transaction fees by making test payments in sandbox or 'not live yet' modes. 
+You can test Stripe transaction fees by making test payments in sandbox or 'not live yet' modes.
 
 You can also sign in to the [GOV.UK Pay admin tool](https://selfservice.payments.service.gov.uk/login) to see transaction fee information or export the information in a CSV file.
 
 If your PSP is Worldpay, you can see your transaction fees on your Worldpay invoices.
 
+For payments processed by Adyen, `fee` and `net_amount` may take several minutes to become available after a successful payment.
+
 #### Get a payment’s events
 
-A payment event is when a payment reaches a milestone in its journey and its `state` updates, such as when it's created, paid, or refunded. 
+A payment event is when a payment reaches a milestone in its journey and its `state` updates, such as when it's created, paid, or refunded.
 
 Use the following API request to get a list of a payment’s events:
 
@@ -300,7 +299,7 @@ Use the following API request to search for payments from your service:
 
 `GET /v1/payments`
 
-Read our [API reference for a full index of the query parameters you can use to filter your search](/api_reference/search_payments_reference). 
+Read our [API reference for a full index of the query parameters you can use to filter your search](/api_reference/search_payments_reference).
 
 If you do not include query parameters in your request, this endpoint returns all payments.
 
@@ -346,10 +345,9 @@ Example response:
 
 You can see definitions and possible values of every attribute for this endpoint in our [API reference](/api_reference/search_payments_reference).
 
-
 ## Check your payments are correct ('reconciliation')
 
-GOV.UK Pay has functionality that makes it easier to do regular reconciliation. 
+GOV.UK Pay has functionality that makes it easier to do regular reconciliation.
 
 You can:
 
@@ -385,6 +383,10 @@ If you have more than 5,000 transactions, you must apply a filter before the CSV
 
 The CSV file contains all transaction data, which is much more comprehensive than the information on the **Transactions** page.
 
+For Adyen transactions, the CSV fee breakdown includes an additional `Fee (gateway)` column at the end of the file. A gateway fee applies to Adyen refunds.
+
+If your integration, spreadsheet or reporting process uses GOV.UK Pay CSV files, make sure it can handle the additional column.
+
 You can process CSV files using spreadsheet software and edit the contents you do not need.
 
 Dates and times in GOV.UK Pay's CSV files use Coordinated Universal Time (UTC). You can [read more about timezones in GOV.UK Pay](#timezones-in-gov-uk-pay).
@@ -405,7 +407,7 @@ You can use payment descriptions to help identify which type of service a user i
 
 If you’re using [payment pages](https://www.payments.service.gov.uk/govuk-payment-pages/), you can add metadata by adding reporting columns in [the GOV.UK Pay admin tool](https://selfservice.payments.service.gov.uk/login).
 
-Custom metadata lets you add more information to payments. For example, you can add an identifier from your finance or accounting system to help you reconcile the payments later. 
+Custom metadata lets you add more information to payments. For example, you can add an identifier from your finance or accounting system to help you reconcile the payments later.
 
 If you added metadata to a payment using the API, you can still see that metadata in the GOV.UK Pay admin tool. You can also use metadata to find payments in the admin tool.
 
@@ -414,6 +416,8 @@ If you added metadata to a payment using the API, you can still see that metadat
 You can integrate your finance and accounting systems with GOV.UK Pay using the API.
 
 For example, you could automatically fetch data about the outcome of payment journeys. You could import that into your finance system so payments can be reconciled against bank transaction information.
+
+For payments processed by Adyen, you can use `fee` and `net_amount` to reconcile payments with the API. These values may not be available immediately after a successful payment.
 
 To help you reconcile payments, you can:
 
@@ -428,7 +432,7 @@ You can use custom metadata to add more information to new payments when creatin
 
 Paying users cannot see metadata while they're making a payment.
 
-Include a `metadata` object in the body of your request to [create a new payment](/api_reference/create_a_payment_reference). 
+Include a `metadata` object in the body of your request to [create a new payment](/api_reference/create_a_payment_reference).
 
 This example request creates a payment for a £100 fine and adds a ledger code and an internal reference number as metadata:
 
@@ -485,7 +489,7 @@ Read more about the `settlement_summary` object in our API reference pages for [
 
 You can use the GOV.UK Pay API to get a list of payments that match certain criteria. For example, you could get a list of successful payments that arrived in your bank account between 1 January 2023 and 31 January 2023.
 
-You can use these lists of payments to help your reconciliation process. 
+You can use these lists of payments to help your reconciliation process.
 
 Read about [how to get a list of payments here](#get-a-list-of-payments-matching-search-criteria) or in [our API reference](/api_reference/search_payments_reference).
 
