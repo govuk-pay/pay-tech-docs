@@ -1,6 +1,6 @@
 ---
 title: Go live
-last_reviewed_on: 2025-11-13
+last_reviewed_on: 2026-10-08
 review_in: 6 months
 weight: 7100
 ---
@@ -8,6 +8,16 @@ weight: 7100
 # Go live
 
 Follow these steps to start taking real payments from users.
+
+> **GOV.UK Pay is replacing Stripe with Adyen**
+
+> GOV.UK Pay will contact your organisation when your service can switch.
+
+> All Stripe services will eventually need to switch to Adyen. GOV.UK Pay will confirm the final deadline later.
+
+> You can still go live with Stripe. If you do, you will need to switch to Adyen by the deadline.
+
+> [Read about switching your payment service provider to Adyen](/switch_payment_service_provider/switch_psp_to_adyen/).
 
 ## Before you start
 
@@ -28,15 +38,15 @@ If you use Worldpay, you must also:
 
 Compared with testing, your live service may have:
 
-- slower response times, because GOV.UK Pay must wait for responses from your PSP
-- lower transaction limits - you should check these with your PSP
+- slower response times, because GOV.UK Pay must wait for responses from your payment service provider
+- lower transaction limits - you should check these with your payment service provider
 
 ## 1. Request to go live with your GOV.UK Pay service
 
 During the go live process, you'll need to:
 
 - provide your organisation's name and address
-- confirm the PSP you chose when you created your service
+- confirm the payment service provider you chose when you created your service
 - read and accept our legal terms
 
 Select your service from **My services**, then select **Request a live account** or **Ask to go live**.
@@ -45,16 +55,17 @@ When you've started the go live process, the **Not live yet** label will disappe
 
 You can still test your service by selecting it, then selecting **Enter sandbox mode**.
 
-## 2. Connect your service to your PSP
+## 2. Connect your service to your payment service provider
 
-Once you've started the go live process, you must connect your GOV.UK Pay service to your payment service provider (PSP).
+After you start the go-live process, you must connect your GOV.UK Pay service to your payment service provider.
 
-We have separate guides to:
+Follow the guidance for your payment service provider:
 
-* [connect your service to Stripe](/switching_to_live/set_up_a_live_stripe_account/), GOV.UK Pay's current PSP
-* [connect your service to Worldpay](/switching_to_live/set_up_a_live_worldpay_account/) using a contract through Government Banking
+* [connect your service to Adyen](/switching_to_live/set_up_a_live_adyen_account/)
+* [connect your service to Stripe](/switching_to_live/set_up_a_live_stripe_account/)
+* [connect your service to Worldpay](/switching_to_live/set_up_a_live_worldpay_account/) if you use a contract through Government Banking
 
-If either GOV.UK Pay's or Government Banking's PSP changes, we'll work with you to move you to the new PSP.
+If either GOV.UK Pay's or Government Banking's payment service provider changes, we'll work with you to move you to the new payment service provider.
 
 ## 3. Choose which card types to accept
 
@@ -66,19 +77,19 @@ You can choose which card types to accept.
 1. Select **Payments**, then select **Card types**.
 1. Choose the card types you want to accept, then select **Save changes**.
 
-If you use Worldpay, you must also make sure that you select the same card types in your PSP account.
+If you use Worldpay, you must also make sure that you select the same card types in your payment service provider account.
 
 You can also [block prepaid cards](/block_prepaid_cards/#block-prepaid-cards).
 
 ### Accept American Express if you use Worldpay
 
-If you use Worldpay and you want to accept American Express cards, you must contact either [Government Banking](https://www.gov.uk/government/groups/government-banking-service-gbs) or your Worldpay account manager
+If you use Worldpay and you want to accept American Express cards, you must contact either [Government Banking](https://www.gov.uk/government/groups/government-banking-service-gbs) or your Worldpay account manager.
 
 ## 4. Check your service settings match your sandbox mode settings
 
 Any changes you made to your service settings during testing will not transfer to your live service.
 
-You need to check your live service's settings match the settings you configured before going live. You can check the settings you had before you went live by selecting your service in the GOV.UK Pay admin tool, then selecting **Enter sandbox mode**. 
+You need to check your live service's settings match the settings you configured before going live. You can check the settings you had before you went live by selecting your service in the GOV.UK Pay admin tool, then selecting **Enter sandbox mode**.
 
 You need to make the following changes to your service's settings if you changed them before you went live:
 
@@ -112,10 +123,10 @@ You make a real payment using either:
     [Read more about securing your API keys](/security/#securing-your-developer-keys).
 
 1. [Make a real payment](/making_payments/#take-a-payment) using the new live API key.
-    
+
     You must use a real payment card. Use a small amount, because GOV.UK Pay will take the payment from the card you use.
 
-    If you want to see the payment in your bank account, make sure the payment amount will be [above the minimum payout](/reporting) after your PSP has taken their fees. If your PSP is Stripe, we recommend a test payment of at least £2.
+    If you want to see the payment in your bank account, make sure the payment amount will be [above the minimum payout](/reporting) after your payment service provider has taken their fees. If your payment service provider is Stripe, we recommend a test payment of at least £2.
 
 ### Make a payment using a payment link
 
@@ -127,7 +138,7 @@ You make a real payment using either:
 
     You must use a real payment card. Use a small amount, because GOV.UK Pay will take the payment from the card you use.
 
-    If you want to see the payment in your bank account, make sure the payment amount will be [above the minimum payout](/reporting) after your PSP has taken their fees. If your PSP is Stripe, we recommend a test payment of at least £2.
+    If you want to see the payment in your bank account, make sure the payment amount will be [above the minimum payout](/reporting) after your payment service provider has taken their fees. If your payment service provider is Stripe, we recommend a test payment of at least £2.
 
 ### Check that the payment was successful
 
@@ -139,11 +150,11 @@ You make a real payment using either:
 
 If your payment or refund fails, check:
 
-- you [connected your service to your PSP](#2-connect-your-service-to-your-psp) correctly
-- your ['risk management' settings](/security/#preventing-fraudulent-payments) if your PSP is Worldpay
+- you [connected your service to your payment service provider](#2-connect-your-service-to-your-payment-service-provider) correctly
+- your ['risk management' settings](/security/#preventing-fraudulent-payments) if your payment service provider is Worldpay
 
-You can also check your PSP settings in the [GOV.UK Pay admin tool](https://selfservice.payments.service.gov.uk/my-services). To check your PSP settings:
+You can also check your payment service provider settings in the [GOV.UK Pay admin tool](https://selfservice.payments.service.gov.uk/my-services). To check your payment service provider settings:
 
 1. Select your service from **My services**.
-1. Select **Settings**
-1. Select **Payment provider**, then select **Stripe details** or **Worldpay details**.
+1. Select **Settings**.
+1. Select **Payment provider**, then select **Adyen details**, **Stripe details** or **Worldpay details**.
