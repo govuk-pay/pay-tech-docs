@@ -7,11 +7,14 @@
     "govuk-frontend": "^3.14.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "bundle exec middleman build",
+    "build-local": "BUILD_ENV=development bundle exec middleman build --verbose"
   },
   "license": "ISC",
   "devDependencies": {
     "jest": "^29.6.0",
+    "jest-environment-jsdom": "^30.3.0",
     "js-cookie": "^3.0.7"
   }
 }
