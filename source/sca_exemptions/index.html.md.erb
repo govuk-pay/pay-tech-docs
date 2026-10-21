@@ -7,11 +7,11 @@ weight: 2700
 
 # Exempt payments from Secure Customer Authentication
 
-GOV.UK Pay authenticates payments with 3D Secure 2 (3DS) when the paying user’s bank requests it. This 3DS check allows the payment to meet Secure Customer Authentication (SCA) requirements. 
+GOV.UK Pay authenticates payments with 3D Secure 2 (3DS) when the paying user’s bank requests it. This 3DS check allows the payment to meet Secure Customer Authentication (SCA) requirements.
 
 GOV.UK Pay’s payment service providers (PSPs) can request an exemption from SCA for payments in certain situations. If the paying user’s bank approves the exemption request, the paying user will not have to authenticate using 3DS. The [Financial Conduct Authority lists situations that may not require SCA](https://www.handbook.fca.org.uk/techstandards/PS/2021/2021_01/chapter-iii/?view=chapter).
 
-Stripe handles exemption requests in the background. If your GOV.UK Pay service uses Stripe, you do not need to do anything. 
+Stripe handles exemption requests in the background. If your GOV.UK Pay service uses Stripe, you do not need to do anything.
 
 This page focuses on exemptions for GOV.UK Pay services that use Worldpay.
 
@@ -43,17 +43,17 @@ Online payments made with corporate cards sometimes fail 3DS checks because corp
 
 GOV.UK Pay can detect if a user is trying to pay with a corporate card and request a corporate exemption.
 
-Corporate card exemptions are currently only available for GOV.UK Pay services that use Worldpay.
+Corporate card exemptions are currently available only for GOV.UK Pay services that use Worldpay.
 
 If the user’s bank rejects the corporate exemption request, the authorisation fails and GOV.UK Pay will show the user a payment failure page.
 
 ### Turn on corporate card exemptions
 
-Worldpay will contact services or the GOV.UK Pay team directly if they think you need to turn on corporate card exemptions exemptions. Corporate card exemptions are not appropriate for most GOV.UK Pay services. 
+Worldpay will contact services or the GOV.UK Pay team directly if they think you need to turn on corporate card exemptions exemptions. Corporate card exemptions are not appropriate for most GOV.UK Pay services.
 
 If Worldpay tells you they have turned on corporate card exemptions, email GOV.UK Pay support at [govuk-pay-support@digital.cabinet-office.gov.uk](mailto:govuk-pay-support@digital.cabinet-office.gov.uk) and tell us your:
 
-* GOV.UK Pay service name 
+* GOV.UK Pay service name
 * Worldpay merchant code
 
 We’ll email you when we have turned on corporate card exemptions for your GOV.UK Pay service.
@@ -110,7 +110,7 @@ You can see if 3DS was required for SCA on a payment through the [GOV.UK Pay adm
 You can see the payment’s 3DS status in the **3D Secure (3DS)** row. **3D Secure (3DS)** will not appear if it is too early in the payment journey to tell if 3DS is required.
 
 ### See if 3DS was required through the API
-The `authorisation_summary` object tells you if a payment required a 3DS check. 
+The `authorisation_summary` object tells you if a payment required a 3DS check.
 
 `authorisation_summary` will not appear if a payment did not require 3DS or if it’s too early in the payment journey to tell if 3DS is required.
 
