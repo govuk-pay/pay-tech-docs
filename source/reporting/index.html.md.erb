@@ -93,7 +93,7 @@ When you select a payment, you can see the history of the payment. For example, 
 
 You can also download a CSV spreadsheet of all your selected payments to help with [reconciliation](#check-your-payments-are-correct-39-reconciliation-39). You can download one report for all your services or one report for each separate service.
 
-You can also see payments made to your bank account by following the link from **My services**. This is only available for GOV.UK Pay services that use Stripe.
+You can also see payments made to your bank account by following the link from **My services**. This is available only for GOV.UK Pay services that use Stripe.
 
 Dates and times in the GOV.UK Pay admin tool use local UK time. You can [read more about timezones in GOV.UK Pay](#timezones-in-gov-uk-pay).
 
@@ -477,7 +477,7 @@ The GOV.UK Pay API can give you payment settlement data in the `settled_date` at
 
 To get settlement information about a single payment, [get information about that payment](#get-information-about-a-single-payment) through our API.
 
-To get settlement information about multiple payments, [get a list of payments](#get-a-list-of-payments-matching-search-criteria) through our API. Use the `from_settled_date` and `to_settled_date` query parameters to only include payments that were settled within a specific date range.
+To get settlement information about multiple payments, [get a list of payments](#get-a-list-of-payments-matching-search-criteria) through our API. Use the `from_settled_date` and `to_settled_date` query parameters to include only payments that were settled within a specific date range.
 
 Read more about the `settlement_summary` object in our API reference pages for [getting information about a single payment](/api_reference/single_payment_reference) and [searching for payments](/api_reference/search_payments_reference).
 
@@ -485,7 +485,7 @@ Read more about the `settlement_summary` object in our API reference pages for [
 
 You can use the GOV.UK Pay API to get a list of payments that match certain criteria. For example, you could get a list of successful payments that arrived in your bank account between 1 January 2023 and 31 January 2023.
 
-You can use these lists of payments to help your reconciliation process. 
+You can use these lists of payments to help your reconciliation process.
 
 Read about [how to get a list of payments here](#get-a-list-of-payments-matching-search-criteria) or in [our API reference](/api_reference/search_payments_reference).
 

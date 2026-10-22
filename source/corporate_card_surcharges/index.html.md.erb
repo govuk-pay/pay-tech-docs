@@ -11,7 +11,7 @@ GOV.UK Pay supports adding a fee or 'surcharge' if your user pays with a corpora
 credit or debit card. You can [contact GOV.UK Pay support](/support_contact_and_more_information/) to ask the team to
 set this up for you.
 
-Each surcharge is a flat amount added to a payment. 
+Each surcharge is a flat amount added to a payment.
 
 You can set a different surcharge for each of the following 3 corporate card types:
 
@@ -39,5 +39,5 @@ response fields:
 | Response field                   | Meaning
 |----------------------------------|-----------------------------------------------------------------------------------------------------------------------|
 | `amount`                       | Contains the amount in pence, without any surcharge. </br> This field always appears, even if a surcharge is not applicable.|
-| `total_amount`                 | Contains the total amount in pence, including any surcharge. </br> Only appears if a surcharge is applicable.               |
-| <nobr>`corporate_card_surcharge`     | Contains only the surcharge amount, in pence. </br> Only appears if a surcharge is applicable.                              |
+| `total_amount`                 | Contains the total amount in pence, including any surcharge. </br> Appears only if a surcharge is applicable.               |
+| <nobr>`corporate_card_surcharge`     | Contains only the surcharge amount, in pence. </br> Appears only if a surcharge is applicable.                              |
