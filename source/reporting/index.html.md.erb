@@ -1,6 +1,6 @@
 ---
 title: Reconcile and report on payments
-last_reviewed_on: 2026-10-15
+last_reviewed_on: 2026-10-21
 review_in: 6 months
 weight: 3100
 ---
@@ -20,21 +20,17 @@ This page covers:
 
 The way payments come into your bank account depends on your payment service provider (PSP).
 
-### How  Adyen payouts work
+### How Adyen and Stripe payouts work
 
-Narrative content: Payouts are another webhook. We get a report and on that report there are payments and refunds and other detail. Payouts are listed as bank transfers. Report is generated around 1am daily with a delay of at least 24 hours.
+You will receive one payment into your bank account for each Adyen or Stripe service you have in Pay.
 
-### How Stripe payouts work
-
-You will receive one payment into your bank account for each Stripe service you have in Pay.
-
-You can choose to have multiple types of transaction going through one service (e.g. licensing and council tax, or parking fines and parking permits), or you can choose to have separate services for each type of transaction. You can use the description you set when you created a payment to help you determine what that payment was for.
+You can choose to have multiple types of transaction going through one service (for example, licensing and council tax, or parking fines and parking permits), or you can choose to have separate services for each type of transaction. You can use the description you set when you created a payment to help you determine what that payment was for.
 
 The reporting API and the CSV download will show the transaction fees paid on each transaction.
 
-You can download a report showing the total amount you received from Stripe in each payout and all the transactions that make up that payout. You can find this in 'My services'.
+You can download a report showing the total amount you received from Adyen or Stripe in each payout and all the transactions that make up that payout. You can find this in **My services** in the admin tool.
 
-The payout from Stripe will appear on your bank statement with a description based on your service’s name. If you want to change this description, just contact the GOV.UK Pay team.
+The payout from Adyen or Stripe will appear on your bank statement with a description based on your service’s name. If you want to change this description, just contact the GOV.UK Pay team.
 
 The minimum payout for Stripe is £1.
 
@@ -100,8 +96,7 @@ Dates and times in the GOV.UK Pay admin tool use local UK time. You can [read mo
 
 ### Use the API to find payments
 
-Before reading this section, you should be familiar with [making
-payments](/making_payments).
+Before reading this section, you should be familiar with [making payments](/making_payments).
 
 You can get data from the GOV.UK Pay API in a format suitable for automatic processing. For example, you could develop software to query the GOV.UK Pay API for payment data periodically and import the data into your finance system. This could remove routine manual operations from your workflow and lead to significant cost savings for your organisation.
 
