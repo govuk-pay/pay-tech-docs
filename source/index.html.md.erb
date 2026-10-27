@@ -1,7 +1,7 @@
 ---
 title: GOV.UK Pay technical documentation
 weight: 1100
-last_reviewed_on: 2026-10-19
+last_reviewed_on: 2026-10-26
 review_in: 12 months
 ---
 
@@ -33,20 +33,22 @@ These are the most recent changes to this documentation.
 
 | Date | Update |
 | --- | --- |
-| 15 October 2026 | Updated [recurring payments guidance](https://docs.payments.service.gov.uk/recurring_payments/) to explain how to check that a recurring payment agreement for Adyen is active before taking subsequent payments. |
-| 15 October 2026 | Corrected [wallet card expiry guidance](https://docs.payments.service.gov.uk/switch_payment_service_provider/check_stripe_to_adyen_integration/) to explain that `card_details.expiry_date` is returned as `null` when the value is unavailable for Adyen payments. |
-| 15 October 2026 | Updated [dispute guidance](https://docs.payments.service.gov.uk/disputes/) to explain how dispute fees differ for payments processed by Stripe and Adyen. |
-| 15 October 2026 | Added [mock card details for Adyen](https://docs.payments.service.gov.uk/testing_govuk_pay/) to support payment testing. |
-| 15 October 2026 | Updated [refund guidance](https://docs.payments.service.gov.uk/refunding_payments/) and the [API reference](https://docs.payments.service.gov.uk/api_reference/) to explain refund statuses, fees and reconciliation for payments processed by Adyen. |
-| 13 October 2026 | Updated the [payment API reference](https://docs.payments.service.gov.uk/api_reference/) to explain payment amount limits, response attributes and when values become available for payments processed by Adyen. |
-| 12 October 2026 | Added notices to the API reference, integration and testing guidance about [switching from Stripe to Adyen](https://docs.payments.service.gov.uk/switch_payment_service_provider/check_stripe_to_adyen_integration/). |
-| 9 October 2026 | Added [guidance on switching a GOV.UK Pay service from Stripe to Adyen](https://docs.payments.service.gov.uk/switch_payment_service_provider/switch_psp_to_adyen/), including preparing for onboarding. |
-| 7 October 2026 | Added [guidance on how switching from Stripe to Adyen affects integrations](https://docs.payments.service.gov.uk/switch_payment_service_provider/check_stripe_to_adyen_integration/) with GOV.UK Pay. |
-| 10 September 2026 | Expanded [API key security guidance](https://docs.payments.service.gov.uk/security/) and added warnings and links from relevant pages. |
-| 2 September 2026 | Clarified [MOTO and PCI DSS guidance](https://docs.payments.service.gov.uk/moto_payments/) about the Attestation of Compliance requirement. |
-| 5 May 2026 | Updated [integration testing guidance](https://docs.payments.service.gov.uk/testing_govuk_pay/) to explain successful test outcomes and what to do after testing. |
-| 11 March 2026 | Updated [testing guidance](https://docs.payments.service.gov.uk/testing_govuk_pay/) to reflect the ‘not live yet’ and sandbox testing modes, with revised mock cards and payment service provider-specific guidance. |
-| 11 March 2026 | Clarified the prerequisites for [going live with Worldpay](https://docs.payments.service.gov.uk/switching_to_live/) and grouped the requirements in one place. |
-| 17 February 2026 | Corrected a Mastercard mock card number in the [integration testing guidance](https://docs.payments.service.gov.uk/testing_govuk_pay/). |
-| 27 January 2026 | Updated [MOTO guidance](https://docs.payments.service.gov.uk/moto_payments/) to emphasise PCI DSS compliance and the need for an Attestation of Compliance. |
-
+| 26 October 2026 | Updated [reconciliation and reporting guidance](/reporting/) to explain payouts for payments processed by Adyen, delays in the availability of `settlement_summary.captured_date`, `fee` and `net_amount`, and the additional `Fee (gateway)` column in CSV downloads. |
+| 26 October 2026 | Clarified in the [recurring payments guidance](/recurring_payments/) that services using Adyen or Stripe do not need to take additional steps with their payment service provider before setting up recurring payments. |
+| 20 October 2026 | Added [guidance on connecting a live service to Adyen](/switching_to_live/set_up_a_live_adyen_account/), including onboarding availability, Adyen checks and making a £1 payment to test the connection. |
+| 15 October 2026 | Updated [recurring payments guidance](/recurring_payments/) to explain how to check that a recurring payment agreement for Adyen is active before taking subsequent payments. |
+| 15 October 2026 | Corrected [wallet card expiry guidance](/switch_payment_service_provider/check_stripe_to_adyen_integration/) to explain that `card_details.expiry_date` is returned as `null` when the value is unavailable for Adyen payments. |
+| 15 October 2026 | Updated [dispute guidance](/disputes/) to explain how dispute fees differ for payments processed by Stripe and Adyen. |
+| 15 October 2026 | Added [mock card details for Adyen](/testing_govuk_pay/) to support payment testing. |
+| 15 October 2026 | Updated [refund guidance](/refunding_payments/) and the [API reference](/api_reference/) to explain refund statuses, fees and reconciliation for payments processed by Adyen. |
+| 13 October 2026 | Updated the [API reference](/api_reference/) to explain payment amount limits, response attributes and when values become available for payments processed by Adyen. |
+| 12 October 2026 | Added notices to the API reference, integration and integration testing guidance about [switching from Stripe to Adyen](/switch_payment_service_provider/switch_psp_to_adyen/). |
+| 9 October 2026 | Added [guidance on switching a GOV.UK Pay service from Stripe to Adyen](/switch_payment_service_provider/switch_psp_to_adyen/), including preparing for onboarding. |
+| 7 October 2026 | Added [guidance on how switching from Stripe to Adyen affects integrations](/switch_payment_service_provider/check_stripe_to_adyen_integration/) with GOV.UK Pay. |
+| 10 September 2026 | Expanded [API key security guidance](/security/) and added warnings and links from relevant pages. |
+| 2 September 2026 | Clarified [MOTO and PCI DSS guidance](/moto_payments/) about the Attestation of Compliance requirement. |
+| 5 May 2026 | Updated [integration testing guidance](/testing_govuk_pay/) to explain successful test outcomes and what to do after testing. |
+| 11 March 2026 | Updated [integration testing guidance](/testing_govuk_pay/) to reflect the ‘not live yet’ and sandbox testing modes, with revised mock cards and payment service provider-specific guidance. |
+| 11 March 2026 | Clarified the prerequisites for [going live with Worldpay](/switching_to_live/) and grouped the requirements in one place. |
+| 17 February 2026 | Corrected a Mastercard mock card number in the [integration testing guidance](/testing_govuk_pay/). |
+| 27 January 2026 | Updated [MOTO guidance](/moto_payments/) to emphasise PCI DSS compliance and the need for an Attestation of Compliance. |
