@@ -2,6 +2,23 @@ require 'govuk_tech_docs'
 require 'html-proofer'
 require 'fileutils'
 
+if ENV['BUILD_ENV'] == "development"
+  set :environment, :development
+end
+
+configure :build do
+  begin
+    js_source_file = File.join('source', 'javascripts', 'application.js')
+
+    if environment?(:production) and File.exist?(js_source_file)        
+      js_target_file = File.join('source', 'javascripts', 'application.min.js')
+
+      File.rename(js_source_file, js_target_file)
+      puts "Renamed JavaScript file from application.js to application.min.js to avoid minification set in govuk_tech_docs gem"
+    end
+  end
+end
+
 GovukTechDocs::SourceUrls.class_eval do
   def report_issue_url
     "mailto:govuk-pay-support@digital.cabinet-office.gov.uk?subject=Problem with GOV.UK Pay technical documentation"
@@ -13,10 +30,13 @@ GovukTechDocs.configure(self)
 after_build do |builder|
   begin
     js_source_file = File.join(config[:build_dir], 'javascripts', 'application.min.js')
-    js_target_file = File.join(config[:build_dir], 'javascripts', 'application.js')
 
-    File.rename(js_source_file, js_target_file)
-    puts "Renamed JavaScript file from application.min.js to application.js"
+    if environment?(:production) and File.exist?(js_source_file)
+      js_target_file = File.join(config[:build_dir], 'javascripts', 'application.js')
+
+      File.rename(js_source_file, js_target_file)
+      puts "Renamed JavaScript file from application.min.js to application.js for site to access correctly"
+    end
 
     HTMLProofer.check_directory(config[:build_dir],
       { :assume_extension => true,
