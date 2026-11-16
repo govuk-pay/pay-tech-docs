@@ -1,6 +1,6 @@
 ---
 title: Reconcile and report on payments
-last_reviewed_on: 2026-10-21
+last_reviewed_on: 2026-11-16
 review_in: 6 months
 weight: 3100
 ---
@@ -206,18 +206,23 @@ In this example, GOV.UK Pay asked the PSP to take the payment from the user's ac
 }
 ```
 
+If your PSP is Adyen, you should receive the payment in your bank account within 4 working days of `captured_date`. This includes:
+
+- 2 working days for Adyen to process the payout
+- up to 2 additional working days for the money to reach your bank account
+
 If your PSP is Stripe, you should receive the payment in your bank account within:
 
 - 2 working days of `captured_date` if your user completed their payment during the week
 - 3 working days of `captured_date` if your user completed their payment at the weekend or on a bank holiday
 
-You can confirm when Stripe makes payments into your bank account by signing in to the [GOV.UK Pay admin tool](https://selfservice.payments.service.gov.uk/) then selecting **Payments to your bank account**.
+You can confirm when Adyen or Stripe makes payments into your bank account by signing in to the [GOV.UK Pay admin tool](https://selfservice.payments.service.gov.uk/) then selecting **Payments to your bank account**.
 
 If your PSP is Worldpay, contact Worldpay support to find out your payment times.
 
 ##### PSP fees
 
-If your PSP is Stripe, we'll automatically deduct the PSP's transaction fee from each payment. You can see how much the fee was when you make the API request to get information about a payment.
+If your PSP is Adyen or Stripe, we'll automatically deduct the PSP's transaction fee from each payment. You can see how much the fee was when you make the API request to get information about a payment.
 
 In this example, we've deducted a £2 PSP fee (`fee`) from the user's £40 payment (`amount`), meaning a £38 net amount (`net_amount`) will be paid into your account:
 
@@ -492,5 +497,5 @@ Read about [how to get a list of payments here](#get-a-list-of-payments-matching
 
 To change what appears on your users’ bank statements, you can either:
 
-* if your PSP is Stripe, [contact us](https://docs.payments.service.gov.uk/support_contact_and_more_information)
+* if your PSP is Adyen or Stripe, [contact us](https://docs.payments.service.gov.uk/support_contact_and_more_information)
 * if you’re using Worldpay, [contact Government Banking](mailto:serviceteam.gbs@hmrc.gov.uk)
