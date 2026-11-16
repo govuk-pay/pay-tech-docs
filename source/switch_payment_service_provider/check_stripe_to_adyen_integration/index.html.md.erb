@@ -1,6 +1,6 @@
 ---
 title: Check how switching from Stripe to Adyen affects your integration
-last_reviewed_on: 2026-10-14
+last_reviewed_on: 2026-11-02
 review_in: 12 months
 weight: 7210
 ---
@@ -293,20 +293,17 @@ Your integration, spreadsheet, reporting process or other system must be able to
 
 Plan and run tests for any changes you make to your integration.
 
-We will update this guidance about how to test these changes when it is available.
+Read [Test your integration](/testing_govuk_pay/) to find out what you can test in ‘not live yet’ and sandbox modes when your service uses Adyen, and which mock card numbers to use.
 
 ### Check automated tests that use Stripe test cards
 
-Adyen uses different test card details from Stripe.
+Stripe and Adyen use different mock card numbers.
 
-Check your automated tests if they use Stripe test card details.
-
-We will update this guidance with the Adyen test card details when they are  confirmed.
-
-When the Adyen test cards are confirmed, update affected automated tests to use the appropriate card for each scenario.
+Check any automated tests that use Stripe mock card numbers. For tests that use Adyen, use the appropriate mock card numbers from the integration testing guidance.
 
 ## Changes to this page
 
-| Date | Change |
-| --- | --- |
+| Date            | Change                                                                                                                                                                                                                                                                                                   |
+|-----------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 2 November 2026 | Updated testing guidance to link to information about testing with Adyen in ‘not live yet’ and sandbox modes, and clarified which automated tests using Stripe mock card numbers need to be checked.                                                                                                     |
 | 14 October 2026 | Corrected [wallet card expiry date guidance](/switch_payment_service_provider/check_stripe_to_adyen_integration/#treat-wallet-card-expiry-dates-as-optional) to clarify that `card_details.expiry_date` is returned as `null` when the value is unavailable, rather than omitted from the  API response. |
