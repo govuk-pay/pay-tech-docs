@@ -1,6 +1,6 @@
 ---
 title: Refund a payment
-last_reviewed_on: 2026-10-14
+last_reviewed_on: 2026-11-24
 review_in: 12 months
 weight: 4100
 ---
@@ -49,12 +49,12 @@ You can see definitions, values, and the limits of every parameter and response 
 
 ### status
 
-|Status|Meaning|
+| Status | Meaning |
 |---|---|
-|pending|You cannot refund the payment yet because your user has not completed the payment.|
-|unavailable|You cannot refund the payment. There are two possible reasons for this:<br><br><li>the payment failed<li>the payment was processed by a PSP that we no longer support, such as ePDQ or Smartpay|
-|available|You can refund the payment. Check how much you can refund in `amount_available`.|
-|full|You cannot refund the payment because you've already refunded the full amount.|
+| pending | You cannot refund the payment yet because your user has not completed the payment. |
+| unavailable | You cannot refund the payment. There are two possible reasons for this: <ul><li>the payment failed</li><li>the payment was processed by a PSP that we no longer support, such as ePDQ or Smartpay</li></ul> |
+| available | You can refund the payment. Check how much you can refund in `amount_available`. |
+| full | You cannot refund the payment because you've already refunded the full amount. |
 
 ## Creating a refund
 
@@ -136,7 +136,7 @@ This response contains:
 * when you created the refund (`created_date`)
 * the unique ID GOV.UK Pay associated with this refund (`refund_id`)
 * the status of the refund (`status`)
-* when your payment service provider (PSP) refunded the payment, if your PSP is Stripe (`settlement_summary`)
+* when your payment service provider (PSP) refunded the payment, if your PSP is Adyen or Stripe (`settlement_summary`)
 
 You can see definitions and possible values of these attributes in our [API reference](/api_reference/refund_status_reference).
 
@@ -144,12 +144,11 @@ You can see definitions and possible values of these attributes in our [API refe
 
 The `status` attribute shows where the refund is in its lifecycle.
 
-|status|Meaning|
+| Status | Meaning |
 |---|---|
-|submitted|We've submitted your refund request to your PSP. Refunds do not have a `submitted` status if you're testing refunds in sandbox or 'not live yet' modes.|
-|success|Your PSP has successfully processed the refund.|
-|error|Your PSP could not process the refund, usually because your user's payment card is cancelled or expired, or you do not have enough money in your account to refund your user.|
-
+| submitted | We've submitted your refund request to your PSP. Refunds do not have a `submitted` status if you're testing refunds in sandbox or 'not live yet' modes. |
+| success | Your PSP has successfully processed the refund. |
+| error | Your PSP could not process the refund, usually because your user's payment card is cancelled or expired, or you do not have enough money in your account to refund your user. |
 
 ## Refund fees
 
@@ -161,15 +160,15 @@ For Adyen refunds, `fee` and `net_amount` may take several minutes to become ava
 
 If your user's payment did not reach your bank account yet, your PSP will:
 
-- cancel the payment, if your PSP is Stripe
+- cancel the payment, if your PSP is Adyen or Stripe
 - take the refund amount after the payment has reached your bank account, if your PSP is Worldpay
 
 If the payment has reached your bank account, your PSP will take the refund amount from:
 
-- the next payment or payments you receive from any of your users, if your PSP is Stripe
+- the next payment or payments you receive from any of your users, if your PSP is Adyen or Stripe
 - your bank account, if your PSP is Worldpay
 
-If your PSP is Stripe, you can see when Stripe took the refund by making an API request to [check the status of a refund](/refunding_payments/#checking-the-status-of-a-refund) (`GET /v1/payments/{PAYMENT_ID}/refunds/{REFUND_ID}`) and looking at the `settlement_summary` object:
+If your PSP is Adyen or Stripe, you can see when it took the refund by [checking the status of a refund](/refunding_payments/#checking-the-status-of-a-refund) (`GET /v1/payments/{PAYMENT_ID}/refunds/{REFUND_ID}`) and looking at the `settlement_summary` object:
 
 ```json
 "settlement_summary": {

@@ -29,7 +29,7 @@ describe("Application JS", () => {
       ).toBe(1);
   });
 
-  it("does not load Google analytics when there is no cokie consent cookie", () => {
+  it("does not load Google analytics when there is no cookie consent cookie", () => {
     require("./application")
 
     expect(
