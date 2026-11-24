@@ -1,0 +1,124 @@
+// component should only be shown if JS is available, by the cookieMessage JS, so hide by default 
+
+.pay-cookie-banner {
+  display: block;
+}
+
+.pay-cookie-banner__wrapper {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.pay-cookie-banner__buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 40.0625em) {
+  .pay-cookie-banner__buttons {
+    flex-wrap: nowrap;
+  }
+}
+
+.pay-cookie-banner__button,
+.pay-cookie-banner__link {
+  vertical-align: baseline;
+}
+
+.pay-cookie-banner__button {
+  display: inline-block;
+  flex: 1 0;
+  padding-left: 60px;
+  padding-right: 60px;
+  margin-bottom: 10px;
+  margin-right: 20px;
+}
+
+@media (min-width: 40.0625em) {
+  .pay-cookie-banner__button {
+    flex: 0 0 150px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 5px;
+  }
+}
+
+.pay-cookie-banner__link {
+  font-family: "GDS Transport", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+  line-height: 1;
+  display: block;
+  width: 100%;
+  padding: 9px 0px 6px;
+}
+
+@media (min-width: 40.0625em) {
+  .pay-cookie-banner__link {
+    display: inline;
+    width: auto;
+    margin-left: 30px;
+  }
+}
+
+.pay-cookie-banner__confirmation {
+  display: none;
+  position: relative;
+  padding: 20px 0;
+}
+
+/* This element is focused using JavaScript so that it's being read out by screen readers
+or this reason we don't want to show the default outline or emphasise it visually using `govuk-focused-text`*/
+.pay-cookie-banner__confirmation:focus {
+  outline: none;
+}
+
+.pay-cookie-banner__confirmation-message,
+.pay-cookie-banner__hide-button {
+  display: block;
+}
+
+@media (min-width: 48.0625em) {
+
+  .pay-cookie-banner__confirmation-message,
+  .pay-cookie-banner__hide-button {
+    display: inline-block;
+  }
+}
+
+.pay-cookie-banner__confirmation-message {
+  margin-right: 20px;
+}
+
+@media (min-width: 48.0625em) {
+  .pay-cookie-banner__confirmation-message {
+    max-width: 90%;
+  }
+}
+
+.pay-cookie-banner__hide-button {
+  font-family: "GDS Transport", Arial, sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #1d70b8;
+  outline: 0;
+  border: 0;
+  background: none;
+  text-decoration: underline;
+  padding: 0;
+  margin-top: 10px;
+  right: 15px;
+  cursor: pointer;
+}
+
+@media (min-width: 40.0625em) {
+  .pay-cookie-banner__hide-button {
+    font-size: 19px;
+    font-size: 1.1875rem;
+    line-height: 1.3157894737;
+  }
+}
