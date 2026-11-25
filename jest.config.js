@@ -3,5 +3,5 @@ module.exports = {
     url: 'http://www.example.org'
   },
   testEnvironment: 'jsdom',
-  testMatch: ["**/source/javascripts/*.test.js"]
+  testMatch: ["**/source/javascripts/**/*.test.js"]
 }

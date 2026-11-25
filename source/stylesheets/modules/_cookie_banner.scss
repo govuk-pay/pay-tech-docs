@@ -1,7 +1,7 @@
-// component should only be shown if JS is available, by the cookieMessage JS, so hide by default 
+// component should only be shown if JS is available, so hide by default 
 
 .pay-cookie-banner {
-  display: block;
+  display: none;
 }
 
 .pay-cookie-banner__wrapper {
