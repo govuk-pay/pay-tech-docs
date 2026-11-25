@@ -1,6 +1,6 @@
 ---
 title: Test your integration
-last_reviewed_on: 2026-11-24
+last_reviewed_on: 2026-11-25
 review_in: 6 months
 weight: 6200
 ---
@@ -165,26 +165,26 @@ There are separate sets of mock card numbers for:
 
 ### Mock card numbers for Adyen
 
-For all test cards, use the expiry date `03/2030`.
+For all Adyen test cards, use `03/30` as the expiry date. GOV.UK Pay also accepts `03/2030`.
 
-Use `737` for the card security code (CVC), except for American Express, which uses `7373`.
+Use `737` for the card security code (CVC) or card verification value (CVV), except for American Express, which uses `7373`.
 
-| Testing action     | Card number      | Cardholder name | Card brand       | Card type | Country        |
-|--------------------|------------------|-----------------|------------------|-----------|----------------|
-| Successful payment | 36006666333344   | Any             | Diners Club      | Credit    | United States  |
-| Successful payment | 3569990010095841 | Any             | JCB              | Credit    | United States  |
-| Successful payment | 5555440012345670 | Any             | Mastercard       | Credit    | United Kingdom |
-| Successful payment | 5355630012345678 | Any             | Mastercard       | Debit     | United Kingdom |
-| Successful payment | 4000020000000000 | Any             | Visa             | Credit    | United States  |
-| Successful payment | 4000620000000007 | Any             | Visa             | Debit     | United States  |
-| Successful payment | 4111111111111111 | Any             | Visa             | Credit    | Netherlands    |
-| Successful payment | 370000000000002  | Any             | American Express | Debit     | United Kingdom |
-| Requires 3DS check | 371449635398431  | Any             | American Express | Credit    | United Kingdom |
-| Requires 3DS check | 4917610000000000 | Any             | Visa             | Debit     | United Kingdom |
-| Card declined      | 5355630012345678 | DECLINED        | Mastercard       | Debit     | United Kingdom |
-| Card expired       | 5355630012345678 | CARD_EXPIRED    | Mastercard       | Debit     | United Kingdom |
-| Invalid CVC code   | 5355630012345678 | CVC_DECLINED    | Mastercard       | Debit     | United Kingdom |
-| General error      | 5355630012345678 | ERROR           | Mastercard       | Debit     | United Kingdom |
+| Testing action     | Card number      | Cardholder name                                            | Card brand       | Card type | Country        |
+|--------------------|------------------|------------------------------------------------------------|------------------|-----------|----------------|
+| Successful payment | 36006666333344   | Any                                                        | Diners Club      | Credit    | United States  |
+| Successful payment | 3569990010095841 | Any                                                        | JCB              | Credit    | United States  |
+| Successful payment | 5555440012345670 | Any                                                        | Mastercard       | Credit    | United Kingdom |
+| Successful payment | 5355630012345678 | Any (except DECLINED, CARD_EXPIRED, CVC_DECLINED or ERROR) | Mastercard       | Debit     | United Kingdom |
+| Successful payment | 4000020000000000 | Any                                                        | Visa             | Credit    | United States  |
+| Successful payment | 4000620000000007 | Any                                                        | Visa             | Debit     | United States  |
+| Successful payment | 4111111111111111 | Any                                                        | Visa             | Credit    | Netherlands    |
+| Successful payment | 370000000000002  | Any                                                        | American Express | Debit     | United Kingdom |
+| Requires 3DS check | 371449635398431  | Any                                                        | American Express | Credit    | United Kingdom |
+| Requires 3DS check | 4917610000000000 | Any                                                        | Visa             | Debit     | United Kingdom |
+| Card declined      | 5355630012345678 | DECLINED                                                   | Mastercard       | Debit     | United Kingdom |
+| Card expired       | 5355630012345678 | CARD_EXPIRED                                               | Mastercard       | Debit     | United Kingdom |
+| Invalid CVC code   | 5355630012345678 | CVC_DECLINED                                               | Mastercard       | Debit     | United Kingdom |
+| General error      | 5355630012345678 | ERROR                                                      | Mastercard       | Debit     | United Kingdom |
 
 ### Mock card numbers for Stripe
 
