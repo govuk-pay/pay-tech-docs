@@ -6,7 +6,7 @@ show_govuk_logo: true
 service_name: GOV.UK Pay
 service_link: https://www.payments.service.gov.uk/
 
-# Links to show on right-hand-side of header
+# Links to show on header
 header_links:
   Get started: https://www.payments.service.gov.uk/getstarted/
   Features: https://www.payments.service.gov.uk/using-govuk-pay/
