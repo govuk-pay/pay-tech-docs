@@ -3,13 +3,13 @@ host: https://docs.payments.service.gov.uk
 
 # Header-related options
 show_govuk_logo: true
-service_name: Pay technical documentation
+service_name: GOV.UK Pay
 service_link: https://www.payments.service.gov.uk/
 
-# Links to show on right-hand-side of header
+# Links to show on header
 header_links:
-  Features: https://www.payments.service.gov.uk/using-govuk-pay/
   Get started: https://www.payments.service.gov.uk/getstarted/
+  Features: https://www.payments.service.gov.uk/using-govuk-pay/
   Documentation: /
   Support: https://www.payments.service.gov.uk/support/
   Sign In: https://selfservice.payments.service.gov.uk/login
