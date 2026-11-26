@@ -18,6 +18,7 @@ if ! which ${BUNDLE} > /dev/null; then \
 fi
 
 echo -e "${white}Building static docs...${NC}"
-${BUNDLE} install --path vendor/bundle
+${BUNDLE} config set --local path vendor/bundle
+${BUNDLE} install
 ${BUNDLE} exec ${MIDDLEMAN} build
 echo -e "${green}Built pay-tech static files...${NC}"

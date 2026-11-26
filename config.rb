@@ -42,9 +42,9 @@ after_build do |builder|
       { :assume_extension => true,
         :disable_external => true,
         :allow_hash_href => true,
-        :empty_alt_ignore => true,
+        :ignore_empty_alt => true,
         :log_level => ':debug',
-        :url_ignore => [
+        :ignore_urls => [
           /.+-authentication/,
           /.+-before-you-start/,
           /.+-filtering-by-date/,
@@ -61,7 +61,7 @@ after_build do |builder|
           /.+support-2/,
           /.+set-the-payment-capture-method/
         ],
-        :url_swap => { "https://docs.payments.service.gov.uk" => "" } }).run
+        :swap_urls => { "https://docs.payments.service.gov.uk" => "" } }).run
   rescue RuntimeError => e
     abort e.to_s
   end
