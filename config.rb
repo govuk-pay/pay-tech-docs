@@ -2,6 +2,9 @@ require 'govuk_tech_docs'
 require 'html-proofer'
 require 'fileutils'
 
+# Point all pages to alternative layout to show cookie banner
+page "/*", :layout => "main_layout"
+
 if ENV['BUILD_ENV'] == "development"
   set :environment, :development
 end
