@@ -1,14 +1,14 @@
 //= require govuk_tech_docs
 //= require analytics
-//= require_directory ../../node_modules/@govuk-pay/pay-js-commons/lib/analytics/dist/
+//= require cookie-banner/cookie-banner
+//= require cookies/cookies
 
 window.addEventListener('DOMContentLoaded', function() {
   if (window.GovUkPay) {
-    window.GovUkPay.cookies.showBannerIfConsentNotSet(window.initialiseGtag)
+    window.GovUkPay.CookieBanner.checkConsentForBannerDisplay(window.initialiseGtag)
 
-    if (window.GovUkPay.cookies.hasAnalyticsConsent()) {
+    if (window.GovUkPay.CookieBanner.hasAnalyticsConsent()) {
       window.initialiseGtag()
     }
-  }
+   }
 })
-

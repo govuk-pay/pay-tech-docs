@@ -2,15 +2,15 @@
  * @jest-environment jsdom
  */
 
-const JsCookie = require("js-cookie");
-require('../../node_modules/@govuk-pay/pay-js-commons/lib/analytics/dist/cookies')
+require("./cookie-banner/cookie-banner")
+require("./cookies/cookies")
 
 describe("Application JS", () => { 
   beforeEach(() => {
     // expire analytics cookie explictly, as cookies are not cleared in jest environment during the tests
     document.cookie = "govuk_pay_cookie_policy=;expires=Thu, 01 Jan 1970 00:00:00 UTC;domain=.example.org";
 
-    window.GovUkPay.cookies.showBannerIfConsentNotSet = jest.fn()
+    window.GovUkPay.CookieBanner.checkConsentForBannerDisplay = jest.fn()
     window.initialiseGtag = jest.fn()
 
     // Override Document ready function in the test
@@ -21,11 +21,11 @@ describe("Application JS", () => {
     jest.resetModules();
   }); 
 
-  it("should always call the showBannerIfConsentNotSet", () => {
+  it("should always call the checkConsentForBannerDisplay", () => {
     require("./application")
 
     expect(
-      window.GovUkPay.cookies.showBannerIfConsentNotSet.mock.calls.length
+      window.GovUkPay.CookieBanner.checkConsentForBannerDisplay.mock.calls.length
       ).toBe(1);
   });
 
@@ -39,7 +39,7 @@ describe("Application JS", () => {
 
   it("does not load Google analytics when cookie consent cookie = false", () => {
     const cookieValue = JSON.stringify({ analytics: false })
-    JsCookie.set("govuk_pay_cookie_policy", cookieValue);
+    window.GovUkPay.Cookies.setCookies("govuk_pay_cookie_policy", cookieValue);
     require("./application")
 
     expect(
@@ -49,7 +49,7 @@ describe("Application JS", () => {
 
   it("should load Google analytics when cookie consent cookie = true", () => {
     const cookieValue = JSON.stringify({ analytics: true })
-    JsCookie.set("govuk_pay_cookie_policy", cookieValue);
+    window.GovUkPay.Cookies.setCookies("govuk_pay_cookie_policy", cookieValue);
 
     require("./application")
 
